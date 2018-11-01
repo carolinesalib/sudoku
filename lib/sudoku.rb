@@ -2,8 +2,7 @@ require 'matrix'
 
 class Sudoku
   def self.valid?(sudoku)
-    sudoku_transpose = Matrix[*sudoku].transpose.to_a
-    check_matrix(sudoku) && check_matrix(sudoku_transpose) && check_block(sudoku)
+    check_matrix(sudoku) && check_reverse(sudoku) && check_block(sudoku)
   end
 
   def self.check_matrix(matrix)
@@ -17,6 +16,11 @@ class Sudoku
 
   def self.sudoku_numbers
     (1..9).to_a
+  end
+
+  def self.check_reverse(matrix)
+    sudoku_transpose = Matrix[*matrix].transpose.to_a
+    check_matrix(sudoku_transpose)
   end
 
   def self.check_block(matrix)
